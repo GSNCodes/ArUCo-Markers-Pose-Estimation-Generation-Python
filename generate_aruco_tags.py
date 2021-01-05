@@ -21,7 +21,7 @@ args = vars(ap.parse_args())
 
 # Check to see if the dictionary is supported
 if ARUCO_DICT.get(args["type"], None) is None:
-	print("ArUCo tag type '{}' is not supported".format(args["type"]))
+	print(f"ArUCo tag type '{args['type']}' is not supported")
 	sys.exit(0)
 
 arucoDict = cv2.aruco.Dictionary_get(ARUCO_DICT[args["type"]])

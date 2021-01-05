@@ -30,7 +30,7 @@ else:
 	video = cv2.VideoCapture(args["video"])
 
 if ARUCO_DICT.get(args["type"], None) is None:
-	print("[Debug] ArUCo tag of '{}' is not supported".format(args["type"]))
+	print(f"ArUCo tag type '{args['type']}' is not supported")
 	sys.exit(0)
 
 arucoDict = cv2.aruco.Dictionary_get(ARUCO_DICT[args["type"]])

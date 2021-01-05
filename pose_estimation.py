@@ -1,6 +1,6 @@
 '''
 Sample Usage:-
-python pose_estimation.py --K_Matrix calibration_matrix.npy --D_Coeff distortion_coefficients.npy
+python pose_estimation.py --K_Matrix calibration_matrix.npy --D_Coeff distortion_coefficients.npy --type DICT_5X5_100
 '''
 
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
     
     if ARUCO_DICT.get(args["type"], None) is None:
-        print(f"ArUCo tag type '{args["type"]}' is not supported")
+        print(f"ArUCo tag type '{args['type']}' is not supported")
         sys.exit(0)
 
     aruco_dict_type = ARUCO_DICT[args["type"]]

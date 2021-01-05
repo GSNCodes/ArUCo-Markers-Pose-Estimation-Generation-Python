@@ -26,7 +26,7 @@ image = cv2.resize(image, (width, height), interpolation=cv2.INTER_CUBIC)
 
 # verify that the supplied ArUCo tag exists and is supported by OpenCV
 if ARUCO_DICT.get(args["type"], None) is None:
-	print(f"ArUCo tag type '{args["type"]}' is not supported")
+	print(f"ArUCo tag type '{args['type']}' is not supported")
 	sys.exit(0)
 
 # load the ArUCo dictionary, grab the ArUCo parameters, and detect
