@@ -63,6 +63,6 @@ You can find more details on other parameters using `python pose_estimation.py -
 The `utils.py` contains the ArUCo Markers dictionary and the other utility function to display the detected markers.
 
 Feel free to reach out to me in case of any issues.  
-If you find this repo useful in any way please do star ⭐️ it so that others can also reap it's benefits.
+If you find this repo useful in any way please do star ⭐️ it so that others can reap it's benefits as well.
 
 Happy Learning! Keep chasing your dreams!
