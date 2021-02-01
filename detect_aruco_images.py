@@ -1,6 +1,6 @@
 '''
 Sample Command:-
-python detect_aruco_images.py --image example_01.png --type DICT_5X5_100
+python detect_aruco_images.py --image Images/test_image_1.png --type DICT_5X5_100
 '''
 import numpy as np
 from utils import ARUCO_DICT, aruco_display
