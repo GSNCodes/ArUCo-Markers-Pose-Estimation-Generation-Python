@@ -59,6 +59,10 @@ The command for running is :-
 
 You can find more details on other parameters using `python pose_estimation.py --help`  
 
+## Output
+
+<img src ='Images/output_sample.png' width = 500>
+
 ### Notes
 The `utils.py` contains the ArUCo Markers dictionary and the other utility function to display the detected markers.
 
