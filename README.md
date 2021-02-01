@@ -6,6 +6,8 @@ to estimate the pose of the object. In addition to this, I have also
 included the code required to obtain the calibration matrix for your 
 camera.
 
+<img src = 'Images/pose_output_image.png' width=400 height=400>
+
 ## 1. ArUCo Marker Generation
 The file `generate_aruco_tags.py` contains the code for ArUCo Marker Generation.
 You need to specify the type of marker you want to generate.
@@ -61,9 +63,11 @@ You can find more details on other parameters using `python pose_estimation.py -
 
 ## Output
 
-<img src ='Images/output_sample.png' width = 500>
+<img src ='Images/output_sample.png' width = 400>  
 
-### Notes
+<img src ='Images/pose_output.gif'>
+
+### <ins>Notes</ins>
 The `utils.py` contains the ArUCo Markers dictionary and the other utility function to display the detected markers.
 
 Feel free to reach out to me in case of any issues.  
