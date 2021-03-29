@@ -24,7 +24,7 @@ video file and the type of marker you want to detect.
 
 The command for running is :-  
 **For inference on images**   
-`python detect_aruco_images.py --image example_01.png --type DICT_5X5_100`  
+`python detect_aruco_images.py --image Images/test_image_1.png --type DICT_5X5_100`  
 **For inference using webcam feed**  
 `python detect_aruco_video.py --type DICT_5X5_100 --camera True `  
 **For inference using video file**   
