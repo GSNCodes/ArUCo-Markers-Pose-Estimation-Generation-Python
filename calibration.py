@@ -9,7 +9,7 @@ import os
 import argparse
 
 
-def calibrate(dirpath, square_size, width=9, height=6, visualize=False):
+def calibrate(dirpath, square_size, width, height, visualize=False):
     """ Apply camera calibration operation for images in the given directory path. """
 
     # termination criteria
@@ -57,8 +57,8 @@ def calibrate(dirpath, square_size, width=9, height=6, visualize=False):
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument("-d", "--dir", required=True, help="Path to folder containing checkerboard images for calibration")
-    ap.add_argument("-w", "--width", type=int, help="Width of checkerboard (default=9)")
-    ap.add_argument("-t", "--height", type=int, help="Height of checkerboard (default=6)")
+    ap.add_argument("-w", "--width", type=int, help="Width of checkerboard (default=9)",  default=9)
+    ap.add_argument("-t", "--height", type=int, help="Height of checkerboard (default=6)", default=6)
     ap.add_argument("-s", "--square_size", type=float, default=1, help="Length of one edge (in metres)")
     ap.add_argument("-v", "--visualize", type=str, default="False", help="To visualize each checkerboard image")
     args = vars(ap.parse_args())
@@ -67,8 +67,10 @@ if __name__ == '__main__':
     # 2.4 cm == 0.024 m
     # square_size = 0.024
     square_size = args['square_size']
+
     width = args['width']
     height = args['height']
+
     if args["visualize"].lower() == "true":
         visualize = True
     else:
