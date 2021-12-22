@@ -67,13 +67,14 @@ if __name__ == '__main__':
     # 2.4 cm == 0.024 m
     # square_size = 0.024
     square_size = args['square_size']
-
+    width = args['width']
+    height = args['height']
     if args["visualize"].lower() == "true":
         visualize = True
     else:
         visualize = False
 
-    ret, mtx, dist, rvecs, tvecs = calibrate(dirpath, square_size, visualize=visualize)
+    ret, mtx, dist, rvecs, tvecs = calibrate(dirpath, square_size, visualize=visualize, width=width, height=height)
 
     print(mtx)
     print(dist)
