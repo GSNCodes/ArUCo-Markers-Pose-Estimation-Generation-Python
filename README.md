@@ -74,3 +74,7 @@ Feel free to reach out to me in case of any issues.
 If you find this repo useful in any way please do star ⭐️ it so that others can reap it's benefits as well.
 
 Happy Learning! Keep chasing your dreams!
+
+## References
+1. https://docs.opencv.org/4.x/d9/d6d/tutorial_table_of_content_aruco.html
+2. https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html
