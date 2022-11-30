@@ -8,6 +8,12 @@ camera.
 
 <img src = 'Images/pose_output_image.png' width=400 height=400>
 
+### Requirements
+
+```bash
+pip3 install -r requirements.txt
+```
+
 ## 1. ArUCo Marker Generation
 The file `generate_aruco_tags.py` contains the code for ArUCo Marker Generation.
 You need to specify the type of marker you want to generate.

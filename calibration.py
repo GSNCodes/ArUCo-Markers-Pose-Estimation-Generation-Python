@@ -9,7 +9,7 @@ import os
 import argparse
 
 
-def calibrate(dirpath, square_size, width, height, visualize=False):
+def calibrate(dirpath: str, square_size: int, width: int, height: int, visualize: bool = False) -> list:
     """ Apply camera calibration operation for images in the given directory path. """
 
     # termination criteria
@@ -62,7 +62,7 @@ if __name__ == '__main__':
     ap.add_argument("-s", "--square_size", type=float, default=1, help="Length of one edge (in metres)")
     ap.add_argument("-v", "--visualize", type=str, default="False", help="To visualize each checkerboard image")
     args = vars(ap.parse_args())
-    
+
     dirpath = args['dir']
     # 2.4 cm == 0.024 m
     # square_size = 0.024
@@ -71,10 +71,7 @@ if __name__ == '__main__':
     width = args['width']
     height = args['height']
 
-    if args["visualize"].lower() == "true":
-        visualize = True
-    else:
-        visualize = False
+    visualize = args["visualize"].lower() == "true"
 
     ret, mtx, dist, rvecs, tvecs = calibrate(dirpath, square_size, visualize=visualize, width=width, height=height)
 

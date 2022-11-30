@@ -24,7 +24,7 @@ ARUCO_DICT = {
 	"DICT_APRILTAG_36h11": cv2.aruco.DICT_APRILTAG_36h11
 }
 
-def aruco_display(corners, ids, rejected, image):
+def aruco_display(corners: list, ids: list, rejected, image):
 	if len(corners) > 0:
 		# flatten the ArUco IDs list
 		ids = ids.flatten()
