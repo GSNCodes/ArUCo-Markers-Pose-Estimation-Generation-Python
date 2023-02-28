@@ -10,9 +10,22 @@ import sys
 from utils import ARUCO_DICT
 import argparse
 import time
+from autolab_core import RigidTransform
+
+def rvec_tvec_to_transform(rvec, tvec):
+    '''
+    convert translation and rotation to pose
+    '''
+    if rvec is None or tvec is None:
+        return None
+
+    print(rvec.shape)
+    R = cv2.Rodrigues(rvec)[0]
+    t = tvec
+    return RigidTransform(R, t, from_frame='tag', to_frame='world')
 
 
-def pose_esitmation(frame, aruco_dict_type, matrix_coefficients, distortion_coefficients):
+def pose_estimation(frame, aruco_dict_type, matrix_coefficients, distortion_coefficients):
 
     '''
     frame - Frame from the video stream
@@ -33,18 +46,19 @@ def pose_esitmation(frame, aruco_dict_type, matrix_coefficients, distortion_coef
         distCoeff=distortion_coefficients)
 
         # If markers are detected
+    rvec, tvec = None, None
     if len(corners) > 0:
         for i in range(0, len(ids)):
             # Estimate pose of each marker and return the values rvec and tvec---(different from those of camera coefficients)
-            rvec, tvec, markerPoints = cv2.aruco.estimatePoseSingleMarkers(corners[i], 0.02, matrix_coefficients,
-                                                                       distortion_coefficients)
+            rvec, tvec, markerPoints = cv2.aruco.estimatePoseSingleMarkers(corners[i], 0.158, matrix_coefficients,
+                                                                       distortion_coefficients) #0.79
             # Draw a square around the markers
             cv2.aruco.drawDetectedMarkers(frame, corners) 
 
             # Draw Axis
             cv2.aruco.drawAxis(frame, matrix_coefficients, distortion_coefficients, rvec, tvec, 0.01)  
 
-    return frame
+    return frame, rvec, tvec
 
 if __name__ == '__main__':
 
@@ -54,7 +68,6 @@ if __name__ == '__main__':
     ap.add_argument("-t", "--type", type=str, default="DICT_ARUCO_ORIGINAL", help="Type of ArUCo tag to detect")
     args = vars(ap.parse_args())
 
-    
     if ARUCO_DICT.get(args["type"], None) is None:
         print(f"ArUCo tag type '{args['type']}' is not supported")
         sys.exit(0)
@@ -62,7 +75,7 @@ if __name__ == '__main__':
     aruco_dict_type = ARUCO_DICT[args["type"]]
     calibration_matrix_path = args["K_Matrix"]
     distortion_coefficients_path = args["D_Coeff"]
-    
+
     k = np.load(calibration_matrix_path)
     d = np.load(distortion_coefficients_path)
 
@@ -75,7 +88,9 @@ if __name__ == '__main__':
         if not ret:
             break
         
-        output = pose_esitmation(frame, aruco_dict_type, k, d)
+        output, rvec, tvec = pose_estimation(frame, aruco_dict_type, k, d)
+        pose = rvec_tvec_to_transform(rvec, tvec)
+        print(pose)
 
         cv2.imshow('Estimated Pose', output)
 
