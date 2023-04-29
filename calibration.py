@@ -8,8 +8,7 @@ import cv2
 import os
 import argparse
 
-
-def calibrate(dirpath: str, square_size: int, width: int, height: int, visualize: bool = False) -> list:
+def calibrate(dirpath, square_size, width, height, visualize=False):
     """ Apply camera calibration operation for images in the given directory path. """
 
     # termination criteria
@@ -34,6 +33,9 @@ def calibrate(dirpath: str, square_size: int, width: int, height: int, visualize
         # Find the chess board corners
         ret, corners = cv2.findChessboardCorners(gray, (width, height), None)
 
+        check_cross = "✅" if ret else "❌"
+        print(fname, check_cross)
+
         # If found, add object points, image points (after refining them)
         if ret:
             objpoints.append(objp)
@@ -45,7 +47,7 @@ def calibrate(dirpath: str, square_size: int, width: int, height: int, visualize
             img = cv2.drawChessboardCorners(img, (width, height), corners2, ret)
 
         if visualize:
-            cv2.imshow('img',img)
+            cv2.imshow('img',gray)
             cv2.waitKey(0)
 
 
