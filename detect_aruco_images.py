@@ -12,6 +12,7 @@ import sys
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True, help="path to input image containing ArUCo tag")
 ap.add_argument("-t", "--type", type=str, default="DICT_ARUCO_ORIGINAL", help="type of ArUCo tag to detect")
+ap.add_argument("-s", "--save_output", action="store_false")
 args = vars(ap.parse_args())
 
 
@@ -32,14 +33,15 @@ if ARUCO_DICT.get(args["type"], None) is None:
 # load the ArUCo dictionary, grab the ArUCo parameters, and detect
 # the markers
 print("Detecting '{}' tags....".format(args["type"]))
-arucoDict = cv2.aruco.Dictionary_get(ARUCO_DICT[args["type"]])
-arucoParams = cv2.aruco.DetectorParameters_create()
-corners, ids, rejected = cv2.aruco.detectMarkers(image, arucoDict, parameters=arucoParams)
+arucoDict = cv2.aruco.getPredefinedDictionary(ARUCO_DICT[args["type"]])
+arucoParams = cv2.aruco.DetectorParameters()
+arucoDetector = cv2.aruco.ArucoDetector(arucoDict, arucoParams)
+corners, ids, rejected = arucoDetector.detectMarkers(image)
 
 detected_markers = aruco_display(corners, ids, rejected, image)
 cv2.imshow("Image", detected_markers)
 
-# # Uncomment to save
-# cv2.imwrite("output_sample.png",detected_markers)
+if args["save_output"]:
+	cv2.imwrite("output_sample.png",detected_markers)
 
 cv2.waitKey(0)

@@ -33,8 +33,9 @@ if ARUCO_DICT.get(args["type"], None) is None:
 	print(f"ArUCo tag type '{args['type']}' is not supported")
 	sys.exit(0)
 
-arucoDict = cv2.aruco.Dictionary_get(ARUCO_DICT[args["type"]])
-arucoParams = cv2.aruco.DetectorParameters_create()
+arucoDict = cv2.aruco.getPredefinedDictionary(ARUCO_DICT[args["type"]])
+arucoParams = cv2.aruco.DetectorParameters()
+arucoDetector = cv2.aruco.ArucoDetector(arucoDict, arucoParams)
 
 while True:
 	ret, frame = video.read()
@@ -42,13 +43,12 @@ while True:
 	if ret is False:
 		break
 
-
 	h, w, _ = frame.shape
 
 	width=1000
 	height = int(width*(h/w))
 	frame = cv2.resize(frame, (width, height), interpolation=cv2.INTER_CUBIC)
-	corners, ids, rejected = cv2.aruco.detectMarkers(frame, arucoDict, parameters=arucoParams)
+	corners, ids, rejected = arucoDetector.detectMarkers(frame)
 
 	detected_markers = aruco_display(corners, ids, rejected, frame)
 
