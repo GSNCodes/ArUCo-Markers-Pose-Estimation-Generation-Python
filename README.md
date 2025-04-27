@@ -65,7 +65,7 @@ You can find more details on other parameters using `python pose_estimation.py -
 
 <img src ='Images/output_sample.png' width = 400>  
 
-<img src ='Images/pose_output.gif'>
+<img src ="Images/pose_output.gif" width="500" height="400">
 
 ### <ins>Notes</ins>
 The `utils.py` contains the ArUCo Markers dictionary and the other utility function to display the detected markers.
